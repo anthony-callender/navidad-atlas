@@ -27,7 +27,8 @@ export class MusicManager {
 
     this.stop();
 
-    const audio = new Audio(`/music/${id}.mp3`);
+    // Use Vite base URL so this works on GitHub Pages subpaths (e.g. /repo-name/).
+    const audio = new Audio(`${import.meta.env.BASE_URL}music/${id}.mp3`);
     audio.loop = opts?.loop ?? true;
     audio.volume = Math.max(0, Math.min(1, opts?.volume ?? this.volume));
 

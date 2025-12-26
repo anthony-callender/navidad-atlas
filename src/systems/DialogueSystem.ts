@@ -129,6 +129,28 @@ export class DialogueSystem {
     this.speakerObject.setText(line.speaker);
     this.textObject.setText(line.text);
 
+    // Make URLs clickable (hand cursor + opens in new tab). Useful for gift links on the ending.
+    const urlMatch = line.text.match(/https?:\/\/\S+/);
+    if (urlMatch) {
+      const url = urlMatch[0];
+      this.textObject.setStyle({ color: '#7dc6ff' });
+      this.textObject.setInteractive({ useHandCursor: true });
+      // Remove previous handlers to avoid stacking across lines.
+      this.textObject.removeAllListeners();
+      this.textObject.on('pointerdown', () => {
+        try {
+          window.open(url, '_blank', 'noopener,noreferrer');
+        } catch {
+          // ignore
+        }
+      });
+    } else {
+      // Restore default style and interactivity when no link is present.
+      this.textObject.setStyle({ color: '#ffffff' });
+      this.textObject.disableInteractive();
+      this.textObject.removeAllListeners();
+    }
+
     // Optional auto-close when the last line is displayed (for cinematic beats)
     if (this.autoCloseMs !== null && this.currentIndex === this.currentDialogue.length - 1) {
       this.autoCloseTimer?.remove(false);

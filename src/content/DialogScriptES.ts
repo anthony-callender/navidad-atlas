@@ -445,7 +445,7 @@ export const DialogScriptES = {
     },
     {
       speaker: 'Tarjeta de Regalo',
-      text: "🎁 Regalo Especial de Navidad: amazon.com/gift | Código: NAVIDADATLAS2024"
+      text: "🎁 Regalo Especial de Navidad (haz clic): https://mail.google.com/mail/u/3/?ogbl#imp/FMfcgzQdzwBXGXKxzHbHJXQKMWJNLptC"
     },
     {
       speaker: 'Tony',
